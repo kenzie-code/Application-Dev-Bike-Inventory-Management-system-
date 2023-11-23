@@ -1,0 +1,120 @@
+﻿<div class="top-row ps-3 navbar navbar-dark" id="nav">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="inventory"><h5 class="text-light">Bike Service Center</h5></a>
+		<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</div>
+
+<div class='@(_collapseNavMenu ? "collapse" : "")' @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3"><h5 class="text-light">Welcome <strong>@Username</strong>!</h5></div>
+        
+        @if (UserRole == Role.Admin)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-light" href="users">
+                    <span class="oi oi-person" /> Users
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-light" href="withdrawalItem">
+                    <span class="oi oi-data-transfer-download" /> Withdrawal Items
+                </NavLink>
+            </div>
+
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-light" href="approvedLog">
+                <span class="oi oi-circle-check" /> Approved Logs
+            </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-light" href="inventory">
+                    <span class="oi oi-cog" /> Inventory Items
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-light" href="pieChart">
+                    <span class="oi oi-pie-chart" /> PieChart
+                </NavLink>
+            </div>
+
+           
+            <div class="nav-item px-3">
+            <NavLink class="nav-link text-light" href="barGraph">
+                <span class="oi oi-signal" /> Bar Graph
+            </NavLink>
+            </div>
+
+           
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-light" href="change-password">
+                    <span class="oi oi-key" /> Change Password
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link text-danger" role="button" @onclick="LogoutHandler">
+                    <span class="oi oi-account-logout" /> Logout
+                </NavLink>
+            </div>
+        }
+        @if  (UserRole == Role.User)
+
+        {
+            <div class="nav-item px-3">
+            <NavLink class="nav-link text-light" href="staffInventory">
+                <span class="oi oi-people" /> Staff Inventory
+            </NavLink>
+        </div> 
+        
+         <div class="nav-item px-3">
+            <NavLink class="nav-link text-light" href="pieChart">
+               <span class="oi oi-pie-chart" /> PieChart
+             </NavLink>
+         </div>
+
+
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link text-light" href="barGraph">
+                <span class="oi oi-signal" /> Bar Graph
+            </NavLink>
+        </div>
+           
+        <div class="nav-item px-3">
+            <NavLink class="nav-link text-light" href="change-password">
+                <span class="oi oi-key" /> Change Password
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link text-danger" role="button" @onclick="LogoutHandler">
+                <span class="oi oi-account-logout" /> Logout
+            </NavLink>
+        </div>
+
+        }
+          
+    </nav>
+</div>
+
+
+@code {
+    [Parameter]
+    public string Username { get; set; }
+    [Parameter]
+    public Role UserRole { get; set; }
+    [Parameter]
+    public EventCallback LogoutHandler { get; set; }
+
+    private bool _collapseNavMenu { get; set; } = true;
+
+    private void ToggleNavMenu()
+    {
+        _collapseNavMenu = !_collapseNavMenu;
+    }
+}
